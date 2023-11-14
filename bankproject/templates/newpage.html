@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        label, select {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="date"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        button {
+           background-color: #4CAF50;
+           color: white;
+           padding: 10px 20px;
+           border: none;
+           cursor: pointer;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form action="/newpage/" method="post">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" name="dob" required>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label for="gender">Gender:</label>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" name="phone" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" name="email" required>
+
+            <label for="address">Address:</label>
+            <textarea name="address" rows="4" required></textarea>
+
+            <label for="district" class="dropbtn" class="fa-solid fa-caret-down">District:</label>
+            <select name="district" id="district" onchange="updateBranch()">
+                <option value="Kozhikkode">Kozhikkode</option>
+                <option value="Kannur">Kannur</option>
+                <option value="Kasarkode">Kasarkode</option>
+                <option value="Wayanad">Wayanad</option>
+                <option value="Malappuram">Malappuram</option>
+            </select>
+
+            <label for="branch">Branch:</label>
+            <select name="branch" id="branch">
+
+            </select>
+            <script>
+                function updateBranches() {
+                var districtSelect = document.getElementById("district");
+                var branchSelect = document.getElementById("branch");
+                branchSelect.innerHTML ="";
+
+                var selectedDistrict = districtSelect.value;
+
+                if (selectedDistrict === "Kozhikkode") {
+                    var KozhikkodeBranches = ["Aluva", "Edapally", "Kakkanad"];
+                    populateOptions(branchSelect, KozhikkodeBranches);
+
+                } else if (selectedDistrict === "Kannur") {
+                    var KannurBranches = ["Ayyanthole", "Poothole", "Koorkenchery"];
+                    populateOptions(branchSelect, KannurBranches);
+                } else if (selectedDistrict === "Kasarkode") {
+                    var KasarkodeBranches = ["Cherkala", "Chittarikkal", " Badiyadka"];
+                    populateOptions(branchSelect, KasarkodeBranches);
+                } else if (selectedDistrict === "Wayanad") {
+                    var WayanadBranches = ["Kalpetta", "Pulpally", "Meppadi"];
+                    populateOptions(branchSelect, WayanadBranches);
+                } else if (selectedDistrict === "Malappuram") {
+                    var MalappuramBranches = ["Kottakkal", "Manjeri", "Ponnani"];
+                    populateOptions(branchSelect, MalappuramBranches);
+                }
+
+            }
+
+                function populateOptions(selectElement, optionsArray) {
+                    for (var i = 0; i < optionsArray.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = optionsArray[i];
+                        option.text = optionsArray[i];
+                        selectElement.add(option);
+                    }
+                }
+
+                updateBranches();
+            </script>
+
+
+
+            <label for="accountType">Account Type:</label>
+            <select name="accountType" required>
+                <option value="Savings Account">Savings Account</option>
+                <option value="Current Account">Current Account</option>
+
+            </select>
+
+            <label>Materials Provided:</label>
+
+            <input type="checkbox" name="debit_card" value="debit_card"> Debit Card
+            <input type="checkbox" name="credit_card" value="credit_card"> Credit Card
+            <input type="checkbox" name="cheque_book" value="cheque_book"> Cheque Book
+            </select>
+            <input type="submit">
+            <button onclick="location.href='/login'">Logout</button><br>
+        <a href="/">Return to Home Page</a>
+        </form>
+        {% for msg in messages %}
+        {{msg}}
+        {% endfor %}
+    </div>
+</body>
+</html>

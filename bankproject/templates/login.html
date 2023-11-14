@@ -1,0 +1,61 @@
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Basic styling for the login form */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            display: block;
+            margin-top: 10px;
+        }
+        /* Styling for the registration form (initially hidden) */
+        .registration-form {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div id="login-form">
+            <h1>Login</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" ><br>
+                <input type="password" name="password" placeholder="Password" ><br>
+                <button type="submit">Submit</button>
+            </form>
+            <a href="/newpage" >Register</a>
+        </div>
+
+    </div>
+</body>
+</html>
+{% endblock %}
